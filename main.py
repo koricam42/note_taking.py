@@ -6,8 +6,8 @@ Resources: Python Crash Course Online Textbook (Chapters 1-7)
 Date: September 14, 2026
 """
 # List to contain notes to maintain order of note creation
-list_of_notes = []
-# Boolean to maintain app state for the main loop
+dict_of_notes = {}
+# Boolean to maintain app state for the primary while loop
 app_running = True
 
 while app_running:
@@ -19,7 +19,10 @@ while app_running:
     user_control = input("Select an Option")
 
     if user_control == '1':
-        print('To Be Added')
+        note_title: str = input("Enter the title of your note: ")
+        note_body: str = input("Enter the body of your note: ")
+        dict_of_notes[note_title] = note_body
+        
     elif user_control == '2':
         print('To Be Added')
     elif user_control == '3':
