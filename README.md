@@ -1,2 +1,2 @@
 # note_taking.py
-A python app for taking notes for your classes.
+A terminal based python app for note taking.
