@@ -49,6 +49,7 @@ def main():
                     print("---------")
                     print(f"{title}")
                 note_to_manage = input("Enter the title of the note you want to manage: ")
+
                 if note_to_manage in dict_of_notes.keys():
                     print("Note Options")
                     print("1. Edit Note")
@@ -57,10 +58,19 @@ def main():
 
                     manage_note = input("Select an option 1-3: ")
 
-                    dict_of_notes[note_to_manage]
-                    print(f"Your note, {note_to_manage} has been deleted.")
+                    if manage_note == "1":
+                        note_rewrite = input(f"Enter the new body of {note_to_manage}: ")
+                        dict_of_notes[note_to_manage] = note_rewrite
+                        print(f"Your note '{note_to_manage}' has successfully been updated.")
+                    elif manage_note == "2":
+                        del dict_of_notes[note_to_manage]
+                        print(f"Your note, {note_to_manage} has been deleted.")
+                    elif manage_note == "3":
+                        print("Returning to menu")
+                    else:
+                        print(f"Invalid option. Returning to menu")
                 else:
-                    print(f"Invalid option. Returning to menu")
+                    print(f"Error, note {note_to_manage} was not found")
         elif user_control == '4':
             print('Goodbye.')
             app_running = False
