@@ -2,7 +2,9 @@
 Name: Note_Taking_App
 Author: Jordan Mensah
 Purpose: A note-taking app that runs in the terminal that allows users to create, view, and delete notes for all of their classes.
-Resources: Python Crash Course Online Textbook (Chapters 1-7)
+Source Code (References):
+    - General Knowledge: Python Crash Course Online Textbook (Chapters 1-7)
+    - Getting length of dict: https://www.geeksforgeeks.org/python/get-length-of-dictionary-in-python/
 Date: September 14, 2026
 """
 # List to contain notes to maintain order of note creation
@@ -24,7 +26,13 @@ while app_running:
         dict_of_notes[note_title] = note_body
         
     elif user_control == '2':
-        print('To Be Added')
+        print('Your Notes')
+        if len(dict_of_notes) == 0:
+            print("You don't have any notes")
+        else:
+            for title, body in dict_of_notes.items():
+                print(f"Title: {title}")
+                print(f"Body: {body}")
     elif user_control == '3':
         print('Goodbye.')
         app_running = False
