@@ -44,6 +44,10 @@ def main():
             if len(dict_of_notes) == 0:
                 print("You have no notes to manage")
             else:
+                print("All Notes")
+                for title in dict_of_notes.keys():
+                    print("---------")
+                    print(f"{title}")
                 note_to_manage = input("Enter the title of the note you want to manage: ")
                 if note_to_manage in dict_of_notes.keys():
                     print("Note Options")
