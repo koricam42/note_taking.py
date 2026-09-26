@@ -24,15 +24,20 @@ while app_running:
         note_title: str = input("Enter the title of your note: ")
         note_body: str = input("Enter the body of your note: ")
         dict_of_notes[note_title] = note_body
-        
+
+
     elif user_control == '2':
         print('Your Notes')
         if len(dict_of_notes) == 0:
             print("You don't have any notes")
         else:
             for title, body in dict_of_notes.items():
+                print("-----------------")
                 print(f"Title: {title}")
                 print(f"Body: {body}")
+
+        input("Press a key to return to the main menu")
+
     elif user_control == '3':
         if len(dict_of_notes) == 0:
             print("You have no notes to manage")
