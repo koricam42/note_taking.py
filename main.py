@@ -7,16 +7,16 @@ Source Code (References):
     - Getting length of dict: https://www.geeksforgeeks.org/python/get-length-of-dictionary-in-python/
 Date: September 14, 2026
 """
-# List to contain notes to maintain order of note creation
 dict_of_notes = {}
-# Boolean to maintain app state for the primary while loop
+
 app_running = True
 
 while app_running:
     print("Python-Based Note Taking App")
     print("1. Create Note")
     print("2. View all Notes")
-    print("3. Close Application")
+    print("3. Manage Notes")
+    print("4. Close Application")
 
     user_control = input("Select an Option")
 
@@ -34,6 +34,8 @@ while app_running:
                 print(f"Title: {title}")
                 print(f"Body: {body}")
     elif user_control == '3':
+        pass
+    elif user_control == '4':
         print('Goodbye.')
         app_running = False
     else: 
