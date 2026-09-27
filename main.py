@@ -12,14 +12,18 @@ import json
 
 path = Path('notes.json')
 
-def main():
+def main() -> None:
+    """Main fuction that runs the note taking application, including user input, loading existing JSON files, saving to JSON files and loading the UI loop
 
+    Returns:
+        None
+    """
     if path.exists():
-        contents = path.read_text()
+        contents: str = path.read_text()
         dict_of_notes = json.loads(contents)
 
     else:
-        dict_of_notes = {}
+        dict_of_notes: dict[str, str] = {}
 
     app_running = True
 
@@ -30,7 +34,7 @@ def main():
         print("3. Manage Notes")
         print("4. Close Application")
 
-        user_control: int = input("Select an Option 1-4: ")
+        user_control: str = input("Select an Option 1-4: ")
 
         if user_control == '1':
             note_title: str = input("Enter the title of your note: ")
@@ -58,7 +62,7 @@ def main():
                 for title in dict_of_notes.keys():
                     print("---------")
                     print(f"{title}")
-                note_to_manage = input("Enter the title of the note you want to manage: ")
+                note_to_manage: str = input("Enter the title of the note you want to manage: ")
 
                 if note_to_manage in dict_of_notes.keys():
                     print("Note Options")
@@ -66,10 +70,10 @@ def main():
                     print("2. Delete Note")
                     print("3. Return")
 
-                    manage_note = input("Select an option 1-3: ")
+                    manage_note: str = input("Select an option 1-3: ")
 
                     if manage_note == "1":
-                        note_rewrite = input(f"Enter the new body of {note_to_manage}: ")
+                        note_rewrite: str = input(f"Enter the new body of {note_to_manage}: ")
                         dict_of_notes[note_to_manage] = note_rewrite
                         print(f"Your note '{note_to_manage}' has successfully been updated.")
                     elif manage_note == "2":
@@ -82,7 +86,7 @@ def main():
                 else:
                     print(f"Error, note {note_to_manage} was not found")
         elif user_control == '4':
-            contents = json.dumps(dict_of_notes)
+            contents: str = json.dumps(dict_of_notes)
             path.write_text(contents)
             print('Goodbye.')
             app_running = False
