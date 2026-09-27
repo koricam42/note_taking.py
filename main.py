@@ -7,9 +7,19 @@ Source Code (References):
     - Getting length of dict: https://www.geeksforgeeks.org/python/get-length-of-dictionary-in-python/
 Date: September 14, 2026
 """
+from pathlib import Path
+import json
+
+path = Path('notes.json')
 
 def main():
-    dict_of_notes = {}
+
+    if path.exists():
+        contents = path.read_text()
+        dict_of_notes = json.loads(contents)
+
+    else:
+        dict_of_notes = {}
 
     app_running = True
 
@@ -72,6 +82,8 @@ def main():
                 else:
                     print(f"Error, note {note_to_manage} was not found")
         elif user_control == '4':
+            contents = json.dumps(dict_of_notes)
+            path.write_text(contents)
             print('Goodbye.')
             app_running = False
         else: 
