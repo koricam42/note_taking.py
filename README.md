@@ -1,4 +1,4 @@
-Video Goes Here -> [![Video TBA](https://TBA)](Video Link Goes Here)
+[![Project 1 Video](https://img.youtube.com/vi/hLS7fUCJgos/maxresdefault.jpg)](https://youtu.be/hLS7fUCJgos)
 # note_taking.py
 # Project 1 - Note Taking App
 
