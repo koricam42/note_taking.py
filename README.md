@@ -1,4 +1,4 @@
-[![Project 1 Video](ttps://markdown-videos-api.vercel.app/youtube/hLS7fUCJgos)](https://youtu.be/hLS7fUCJgos)
+[![Project 1 Video](https://markdown-videos-api.vercel.app/youtube/hLS7fUCJgos)](https://youtu.be/hLS7fUCJgos)
 # note_taking.py
 # Project 1 - Note Taking App
 
