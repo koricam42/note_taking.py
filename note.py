@@ -2,6 +2,7 @@
 Name: 
 Author: Jordan Mensah
 Purpose: Note class that represents an individual note.
+Source Code (References): TBA
 Date: 10/6/26
 """
 
