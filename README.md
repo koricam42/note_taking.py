@@ -27,3 +27,5 @@ A terminal-based python application for taking notes.
 * [Pathlib Python Module Help](https://www.geeksforgeeks.org/python/pathlib-module-in-python/)
 * [Python JSON read/write help](https://www.geeksforgeeks.org/python/reading-and-writing-json-to-a-file-in-python/)
 * [Python Dictionary help](https://www.geeksforgeeks.org/python/python-dictionary/)
+
+Shortened video link (https://youtu.be/rHoR2kfQJ6g) Main is at *TOP*
