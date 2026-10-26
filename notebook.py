@@ -19,15 +19,22 @@ class Notebook:
         """
         Creates a Note and adds it to the notes dictionary
         """
-        pass
+        new_note = Note[title: str, body: str]
+        self.notes[title] = new_note
 
     def delete_note(self, title: str) -> None:
         """
         Deletes the selected Note from the note dictionary if it exists
         """
+        if title in self.notes:
+            del self.notes[title]
 
-        pass
+        else:
+            print(f'Error, note {title} was not found.')
+
     def edit_note(self, title: str, new_body: str) -> None:
         "Updates the body of a existing note"
-        
-        pass
+        if title in self.notes:
+            self.notes[title].body = new_body
+        else:
+            print(f'Error, note {title} was not found.')
