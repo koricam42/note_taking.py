@@ -16,6 +16,7 @@ class Notebook:
     """
     def __init__(self) -> None:
         self.notes = {}
+        self.load_notes()
 
     def create_note(self, title: str, body: str) -> None:
         """
@@ -51,4 +52,20 @@ class Notebook:
 
         contents = json.dumps(save_data)
 
-        path.write_text(contents)        
+        path.write_text(contents)     
+
+    def load_notes(self) -> None:
+
+        path = Path('notes.json')
+
+        try:
+            contents = path.read_text()
+
+            new_dict = json.loads(contents)
+
+            for title, body in new_dict.items():
+                self.create_note(title, body)
+
+        except FileNotFoundError:
+            pass
+            
