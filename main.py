@@ -9,6 +9,7 @@ Date: September 14, 2026
 """
 from pathlib import Path
 import json
+from notebook import Notebook
 
 path = Path('notes.json')
 
@@ -18,13 +19,15 @@ def main() -> None:
     Returns:
         None
     """
-    if path.exists():
-        contents: str = path.read_text()
-        dict_of_notes = json.loads(contents)
+    # To be refactored
+    # if path.exists():
+    #     contents: str = path.read_text()
+    #     dict_of_notes = json.loads(contents)
 
-    else:
-        dict_of_notes: dict[str, str] = {}
+    # else:
+    #     dict_of_notes: dict[str, str] = {}
 
+    app_notebook = Notebook()
     app_running = True
 
     while app_running:
@@ -39,32 +42,33 @@ def main() -> None:
         if user_control == '1':
             note_title: str = input("Enter the title of your note: ")
             note_body: str = input("Enter the body of your note: ")
-            dict_of_notes[note_title] = note_body
 
+            app_notebook.create_note(note_title, note_body)
+            print(f"Note {note_title} has been created successfully.")
 
         elif user_control == '2':
             print('Your Notes')
-            if len(dict_of_notes) == 0:
-                print("You don't have any notes")
+            if len(app_notebook.notes) == 0:
+                print(f"You have zero notes.")
             else:
-                for title, body in dict_of_notes.items():
+                for title, note_obj in app_notebook.notes.items():
                     print("-----------------")
                     print(f"Title: {title}")
-                    print(f"Body: {body}")
+                    print(f"Body: {note_obj.body}")
 
             input("Press a key to return to the main menu")
 
         elif user_control == '3':
-            if len(dict_of_notes) == 0:
-                print("You have no notes to manage")
+            if len(app_notebook.notes) == 0:
+                print("You have no notes to manage.")
             else:
                 print("All Notes")
-                for title in dict_of_notes.keys():
+                for title in app_notebook.notes.keys():
                     print("---------")
                     print(f"{title}")
                 note_to_manage: str = input("Enter the title of the note you want to manage: ")
 
-                if note_to_manage in dict_of_notes.keys():
+                if note_to_manage in app_notebook.notes.keys():
                     print("Note Options")
                     print("1. Edit Note")
                     print("2. Delete Note")
@@ -74,10 +78,10 @@ def main() -> None:
 
                     if manage_note == "1":
                         note_rewrite: str = input(f"Enter the new body of {note_to_manage}: ")
-                        dict_of_notes[note_to_manage] = note_rewrite
+                        app_notebook.edit_note(note_to_manage, note_rewrite)
                         print(f"Your note '{note_to_manage}' has successfully been updated.")
                     elif manage_note == "2":
-                        del dict_of_notes[note_to_manage]
+                        app_notebook.delete_note(note_to_manage)
                         print(f"Your note, {note_to_manage} has been deleted.")
                     elif manage_note == "3":
                         print("Returning to menu")
@@ -86,8 +90,9 @@ def main() -> None:
                 else:
                     print(f"Error, note {note_to_manage} was not found")
         elif user_control == '4':
-            contents: str = json.dumps(dict_of_notes)
-            path.write_text(contents)
+            # To be refactored later
+            # contents: str = json.dumps(dict_of_notes)
+            # path.write_text(contents)
             print('Goodbye.')
             app_running = False
         else: 

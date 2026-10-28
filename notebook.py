@@ -19,7 +19,7 @@ class Notebook:
         """
         Creates a Note and adds it to the notes dictionary
         """
-        new_note = Note[title: str, body: str]
+        new_note = Note(title, body)
         self.notes[title] = new_note
 
     def delete_note(self, title: str) -> None:
