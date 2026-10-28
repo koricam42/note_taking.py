@@ -6,6 +6,8 @@ Source Code (References): TBA
 Date: 10/6/26
 """
 from note import Note
+import json
+from pathlib import Path
 
 class Notebook:
     """
@@ -38,3 +40,15 @@ class Notebook:
             self.notes[title].body = new_body
         else:
             print(f'Error, note {title} was not found.')
+
+    def save_notes(self) -> None:
+        path = Path('notes.json')
+
+        save_data = {}
+
+        for title, note_obj in self.notes.items():
+            save_data[title] = note_obj.body
+
+        contents = json.dumps(save_data)
+
+        path.write_text(contents)        

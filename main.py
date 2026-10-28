@@ -93,9 +93,10 @@ def main() -> None:
             # To be refactored later
             # contents: str = json.dumps(dict_of_notes)
             # path.write_text(contents)
+            app_notebook.save_notes()
             print('Goodbye.')
             app_running = False
         else: 
-            print('Not a valid option. Please select a number from 1-4.')
+            print('Not a valid option. Please select2 a number from 1-4.')
 
 main()
