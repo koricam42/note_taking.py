@@ -63,12 +63,25 @@ def main() -> None:
                 print("You have no notes to manage.")
             else:
                 print("All Notes")
+                count = 1
                 for title in app_notebook.notes.keys():
                     print("---------")
-                    print(f"{title}")
-                note_to_manage: str = input("Enter the title of the note you want to manage: ")
+                    print(f"{count}. {title}")
+                    count += 1
+            user_input: str = input("Enter the number of the note you want to manage: ")
 
-                if note_to_manage in app_notebook.notes.keys():
+            try:
+                user_choice = int(user_input)
+                search_counter = 1
+                note_to_manage = ""
+
+                for title in app_notebook.notes.keys():
+                    if search_counter == user_choice:
+                        note_to_manage = title
+                        break
+                    search_counter += 1
+                if note_to_manage != "":
+                    print(f"Managing {note_to_manage}")
                     print("Note Options")
                     print("1. Edit Note")
                     print("2. Delete Note")
@@ -89,6 +102,10 @@ def main() -> None:
                         print(f"Invalid option. Returning to menu")
                 else:
                     print(f"Error, note {note_to_manage} was not found")
+
+            except ValueError:
+                print("Error, please enter a valid number.")
+
         elif user_control == '4':
             # To be refactored later
             # contents: str = json.dumps(dict_of_notes)
