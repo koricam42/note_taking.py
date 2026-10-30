@@ -56,6 +56,13 @@ def main() -> None:
                     print(f"Title: {title}")
                     print(f"Body: {note_obj.body}")
 
+                    list_of_words = note_obj.body.split()
+
+                    word_count = len(list_of_words)
+
+                    print(f"Word Count: {word_count}")
+
+
             input("Press a key to return to the main menu")
 
         elif user_control == '3':
@@ -64,10 +71,17 @@ def main() -> None:
             else:
                 print("All Notes")
                 count = 1
-                for title in app_notebook.notes.keys():
+                for title, note_obj in app_notebook.notes.items():
                     print("---------")
                     print(f"{count}. {title}")
                     count += 1
+
+                    list_of_words = note_obj.body.split()
+                    
+                    word_count = len(list_of_words)
+    
+                    print(f"Word Count: {word_count}")
+
             user_input: str = input("Enter the number of the note you want to manage: ")
 
             try:
