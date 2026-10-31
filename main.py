@@ -21,18 +21,15 @@ class AppInterface:
     def display_note_list(self) -> None:
         """_summary_
         """
-        for title, note_obj in app_notebook.notes.items():
-                        print("-----------------")
-                        print(f"Title: {title}")
-                        print(f"Body: {note_obj.body}")
-        
-                        list_of_words = note_obj.body.split()
-        
-                        word_count = len(list_of_words)
-        
-                        print(f"Word Count: {word_count}")
-        
-        pass
+        count =  1
+        for title, note_obj in self.app_notebook.notes.items():
+            print("-----------------")
+            print(f"{count}. {title}")
+            print(f"Body: {note_obj.body}")
+            word_count = len(note_obj.body.split())
+            print(f"Word Count: {word_count}")
+            count += 1
+
     def note_creator(self) -> None:
         """_summary_
         """
@@ -40,7 +37,7 @@ class AppInterface:
         note_title: str = input("Enter the title of your note: ")
         note_body: str = input("Enter the body of your note: ")
 
-        noteb.create_note(note_title, note_body)
+        self.app_notebook.create_note(note_title, note_body)
         print(f"Note {note_title} has been created successfully.")
         pass
     def note_viewer(self) -> None:
@@ -58,35 +55,27 @@ class AppInterface:
     def note_manager(self) -> None:
         """_summary_
         """
-        # To be finalized later
-    if len(app_notebook.notes) == 0:
+        # Option 3
+        if len(self.app_notebook.notes) == 0:
             print("You have no notes to manage.")
-    else:
+            return
+    
         print("All Notes")
-        count = 1
-        for title, note_obj in app_notebook.notes.items():
-            print("---------")
-            print(f"{count}. {title}")
-            count += 1
+        self.display_note_list()
 
-            list_of_words = note_obj.body.split()
-            
-            word_count = len(list_of_words)
-
-            print(f"Word Count: {word_count}")
-
-    user_input: str = input("Enter the number of the note you want to manage: ")
-
+        user_input: str = input("Enter the number of the note you want to manage: ")
+        
         try:
             user_choice = int(user_input)
             search_counter = 1
             note_to_manage = ""
 
-            for title in app_notebook.notes.keys():
+            for title in self.app_notebook.notes.keys():
                 if search_counter == user_choice:
                     note_to_manage = title
                     break
                 search_counter += 1
+
             if note_to_manage != "":
                 print(f"Managing {note_to_manage}")
                 print("Note Options")
@@ -98,10 +87,10 @@ class AppInterface:
 
                 if manage_note == "1":
                     note_rewrite: str = input(f"Enter the new body of {note_to_manage}: ")
-                    app_notebook.edit_note(note_to_manage, note_rewrite)
+                    self.app_notebook.edit_note(note_to_manage, note_rewrite)
                     print(f"Your note '{note_to_manage}' has successfully been updated.")
                 elif manage_note == "2":
-                    app_notebook.delete_note(note_to_manage)
+                    self.app_notebook.delete_note(note_to_manage)
                     print(f"Your note, {note_to_manage} has been deleted.")
                 elif manage_note == "3":
                     print("Returning to menu")
@@ -143,6 +132,6 @@ class AppInterface:
             else: 
                 print('Not a valid option. Please select2 a number from 1-4.')
 
-    if __name__ == "__main__"():
-        ui = AppInterface()
-        ui.run()
+if __name__ == "__main__":
+    ui = AppInterface()
+    ui.main()
