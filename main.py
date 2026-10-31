@@ -7,19 +7,15 @@ Source Code (References):
     - Getting length of dict: https://www.geeksforgeeks.org/python/get-length-of-dictionary-in-python/
 Date: September 14, 2026
 """
-from pathlib import Path
 from notebook import Notebook
-
-# path = Path('notes.json') -> To be dealt with later.
 
 class AppInterface:
     def __init__(self):
         self.app_notebook = Notebook()
         self.app_running = True
 
-    # Methods to handle various app functions, to be filled out later...
     def display_note_list(self) -> None:
-        """_summary_
+        """Method to handle the displaying of notes when needed, to be filled out later...
         """
         count =  1
         for title, note_obj in self.app_notebook.notes.items():
@@ -33,17 +29,15 @@ class AppInterface:
     def note_creator(self) -> None:
         """_summary_
         """
-        # To be finalized later
         note_title: str = input("Enter the title of your note: ")
         note_body: str = input("Enter the body of your note: ")
 
         self.app_notebook.create_note(note_title, note_body)
         print(f"Note {note_title} has been created successfully.")
-        pass
+
     def note_viewer(self) -> None:
         """_summary_
         """
-        # To be finalized later
         print('Your Notes')
         if len(self.app_notebook.notes) == 0:
             print(f"You have zero notes.")
@@ -51,11 +45,9 @@ class AppInterface:
             self.display_note_list()
         input("Press a key to return to the main menu")
         
-        pass
     def note_manager(self) -> None:
         """_summary_
         """
-        # Option 3
         if len(self.app_notebook.notes) == 0:
             print("You have no notes to manage.")
             return
@@ -108,8 +100,6 @@ class AppInterface:
         """
         Main fuction that runs the UI loop
         """
-        # To be finalized later
-
         while self.app_running:
             print("Python-Based Note Taking App")
             print("1. Create Note")
