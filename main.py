@@ -13,6 +13,7 @@ class AppInterface:
     def __init__(self):
         self.app_notebook = Notebook()
         self.app_running = True
+        self.note_to_manage = ""
 
     def display_note_list(self) -> None:
         """Method to handle the displaying of notes when needed, to be filled out later...
@@ -44,8 +45,20 @@ class AppInterface:
         else:
             self.display_note_list()
         input("Press a key to return to the main menu")
+
+    def note_manager_editor(self) -> None:
+        note_rewrite: str = input(f"Enter the new body of {self.note_to_manage}: ")
+        self.app_notebook.edit_note(self.note_to_manage, note_rewrite)
+        print(f"Your note '{self.note_to_manage}' has successfully been updated.")
+
+    def note_manager_shutdown(self) -> None:
+        self.app_notebook.delete_note(self.note_to_manage)
+        print(f"Your note, {self.note_to_manage} has been deleted.")
+
+    def note_manager_return(self) -> None:
+        print("Returning to menu")
         
-    def note_manager(self) -> None:
+    def note_manager_main(self) -> None:
         """_summary_
         """
         if len(self.app_notebook.notes) == 0:
@@ -60,16 +73,16 @@ class AppInterface:
         try:
             user_choice = int(user_input)
             search_counter = 1
-            note_to_manage = ""
+            self.note_to_manage = ""
 
             for title in self.app_notebook.notes.keys():
                 if search_counter == user_choice:
-                    note_to_manage = title
+                    self.note_to_manage = title
                     break
                 search_counter += 1
 
-            if note_to_manage != "":
-                print(f"Managing {note_to_manage}")
+            if self.note_to_manage != "":
+                print(f"Managing {self.note_to_manage}")
                 print("Note Options")
                 print("1. Edit Note")
                 print("2. Delete Note")
@@ -77,31 +90,42 @@ class AppInterface:
 
                 manage_note: str = input("Select an option 1-3: ")
 
-                if manage_note == "1":
-                    note_rewrite: str = input(f"Enter the new body of {note_to_manage}: ")
-                    self.app_notebook.edit_note(note_to_manage, note_rewrite)
-                    print(f"Your note '{note_to_manage}' has successfully been updated.")
-                elif manage_note == "2":
-                    self.app_notebook.delete_note(note_to_manage)
-                    print(f"Your note, {note_to_manage} has been deleted.")
-                elif manage_note == "3":
-                    print("Returning to menu")
+                manager_actions = {
+                    "1": self.note_manager_editor,
+                    "2": self.note_manager_shutdown,
+                    "3": self.note_manager_return
+               }
+
+                action = manager_actions.get(manage_note)
+
+                if action:
+                    action()
                 else:
                     print(f"Invalid option. Returning to menu")
             else:
-                print(f"Error, note {note_to_manage} was not found")
+                print(f"Error, note number {user_choice} was not found.")        
 
         except ValueError:
             print("Error, please enter a valid number.")
-    
-        pass
+
+    def note_shutdown(self):
+        self.app_notebook.save_notes()
+        print("Goodbye.")
+        self.app_running = False
 
     def main(self) -> None:
         """
         Main fuction that runs the UI loop
         """
+        menu_options = {
+            "1": self.note_creator,
+            "2": self.note_viewer,
+            "3": self.note_manager_main,
+            "4": self.note_shutdown
+        }
+
         while self.app_running:
-            print("Python-Based Note Taking App")
+            print("\nPython-Based Note Taking App")
             print("1. Create Note")
             print("2. View all Notes")
             print("3. Manage Notes")
@@ -109,18 +133,12 @@ class AppInterface:
 
             user_control: str = input("Select an Option 1-4: ")
 
-            if user_control == '1':
-                self.note_creator()
-            elif user_control == '2':
-                self.note_viewer()
-            elif user_control == '3':
-                self.note_manager()
-            elif user_control == '4':
-                self.app_notebook.save_notes()
-                print('Goodbye.')
-                self.app_running = False
-            else: 
-                print('Not a valid option. Please select2 a number from 1-4.')
+            option = menu_options.get(user_control)
+                
+            if option:
+                option()
+            else:
+                print("Not a valid option. Please select a number from 1-4.")
 
 if __name__ == "__main__":
     ui = AppInterface()
