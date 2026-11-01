@@ -10,26 +10,26 @@ Date: September 14, 2026
 from notebook import Notebook
 
 class AppInterface:
+    """Handles the terminal-based interface for the application"""
+
     def __init__(self):
+        """Initalize notebook backend, flag for application state, and note state"""
         self.app_notebook = Notebook()
         self.app_running = True
         self.note_to_manage = ""
 
     def display_note_list(self) -> None:
-        """Method to handle the displaying of notes when needed, to be filled out later...
-        """
+        """Method to handle the displaying of all stored notes with numbers, bodies, and word count"""
         count =  1
         for title, note_obj in self.app_notebook.notes.items():
             print("-----------------")
             print(f"{count}. {title}")
             print(f"Body: {note_obj.body}")
-            word_count = len(note_obj.body.split())
-            print(f"Word Count: {word_count}")
+            print(f"Word Count: {note_obj.get_word_count()}")
             count += 1
 
     def note_creator(self) -> None:
-        """_summary_
-        """
+        """Prompts user for a title and body to create a new note"""
         note_title: str = input("Enter the title of your note: ")
         note_body: str = input("Enter the body of your note: ")
 
@@ -37,41 +37,49 @@ class AppInterface:
         print(f"Note {note_title} has been created successfully.")
 
     def note_viewer(self) -> None:
-        """_summary_
-        """
+        """Display all existing notes or notify user if the notebook is empty"""
         print('Your Notes')
-        if len(self.app_notebook.notes) == 0:
+        if not self.app_notebook.notes:
             print(f"You have zero notes.")
         else:
             self.display_note_list()
-        input("Press a key to return to the main menu")
+        input("\nPress a key to return to the main menu")
 
     def note_manager_editor(self) -> None:
+        """Prompts user for a new body and updates the currently active note"""
         note_rewrite: str = input(f"Enter the new body of {self.note_to_manage}: ")
-        self.app_notebook.edit_note(self.note_to_manage, note_rewrite)
-        print(f"Your note '{self.note_to_manage}' has successfully been updated.")
+        if self.app_notebook.edit_note(self.note_to_manage, note_rewrite):
+            print(f"Your note '{self.note_to_manage}' has successfully been updated.")
+        else:
+            print(f"Error, note {self.note_to_manage} was not found.")
 
-    def note_manager_shutdown(self) -> None:
-        self.app_notebook.delete_note(self.note_to_manage)
-        print(f"Your note, {self.note_to_manage} has been deleted.")
+    def note_manager_removal(self) -> None:
+        """Deletes currently selected note from the notebook"""
+        if self.app_notebook.delete_note(self.note_to_manage):
+            print(f"Your note, {self.note_to_manage} has been deleted.")
+        else:
+            print(f"Error, note {self.note_to_manage} was not found.")
 
-    def note_manager_return(self) -> None:
+    def note_manager_dismissal(self) -> None:
+        """Cancel note management and return to main menu"""
         print("Returning to menu")
         
     def note_manager_main(self) -> None:
-        """_summary_
-        """
-        if len(self.app_notebook.notes) == 0:
+        """Display notes, prompts user to select note by number and routes input to management actions"""
+        if not self.app_notebook.notes:
             print("You have no notes to manage.")
             return
     
-        print("All Notes")
+        print("\nAll Notes")
         self.display_note_list()
 
         user_input: str = input("Enter the number of the note you want to manage: ")
         
         try:
             user_choice = int(user_input)
+        except ValueError:
+            print("Error, please enter a valid number.")
+        else:
             search_counter = 1
             self.note_to_manage = ""
 
@@ -82,7 +90,7 @@ class AppInterface:
                 search_counter += 1
 
             if self.note_to_manage != "":
-                print(f"Managing {self.note_to_manage}")
+                print(f"\nManaging {self.note_to_manage}")
                 print("Note Options")
                 print("1. Edit Note")
                 print("2. Delete Note")
@@ -92,8 +100,8 @@ class AppInterface:
 
                 manager_actions = {
                     "1": self.note_manager_editor,
-                    "2": self.note_manager_shutdown,
-                    "3": self.note_manager_return
+                    "2": self.note_manager_removal,
+                    "3": self.note_manager_dismissal
                }
 
                 action = manager_actions.get(manage_note)
@@ -105,18 +113,14 @@ class AppInterface:
             else:
                 print(f"Error, note number {user_choice} was not found.")        
 
-        except ValueError:
-            print("Error, please enter a valid number.")
-
     def note_shutdown(self):
+        """Saves all notes to JSON storage and ends main application loop"""
         self.app_notebook.save_notes()
         print("Goodbye.")
         self.app_running = False
 
     def main(self) -> None:
-        """
-        Main fuction that runs the UI loop
-        """
+        """Main fuction that runs the UI loop via dictionary dispatch"""
         menu_options = {
             "1": self.note_creator,
             "2": self.note_viewer,
