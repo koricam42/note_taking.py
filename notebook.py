@@ -13,7 +13,7 @@ from note import Note
 
 class Notebook:
     """Manages the creation, editing, deleting, and persistence of Note objects"""
-
+    
     def __init__(self, storage_path: Path = Path("notes.json")) -> None:
         """Initalizes the notebook dictionary and loads existing notes from storage"""
         self.storage_path = storage_path
@@ -35,8 +35,8 @@ class Notebook:
         "Updates the body of a existing note and returns True, returns False if no note was found"
         if title in self.notes:
             self.notes[title].body = new_body
-        else:
-            print(f'Error, note {title} was not found.')
+            return True
+        return False
 
     def save_notes(self) -> None:
         """Convert all notes to JSON string and write them to a file"""

@@ -28,3 +28,14 @@ def test_note_word_count(sample_notebook: Notebook) -> None:
     """Verifies that Note.get_word_count returns the exact number of words"""
     note = sample_notebook.notes["CSCI 2467"]
     assert note.get_word_count() == 2
+
+def test_edit_note(sample_notebook: Notebook) -> None:
+    """"""
+    assert sample_notebook.edit_note("CSCI 2467", "Updated Body Text") is True
+    assert sample_notebook.notes["CSCI 2467"].body == "Updated Body Text"
+    assert sample_notebook.edit_note("Note which does not exist", "New Text") is False
+
+def test_delete_note(sample_notebook: Notebook) -> None:
+    pass
+def test_note_persistence(sample_notebook: Notebook) -> None:
+    pass
