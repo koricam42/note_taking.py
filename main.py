@@ -38,7 +38,7 @@ class AppInterface:
 
     def note_viewer(self) -> None:
         """Display all existing notes or notify user if the notebook is empty"""
-        print('Your Notes')
+        print('\nYour Notes')
         if not self.app_notebook.notes:
             print(f"You have zero notes.")
         else:

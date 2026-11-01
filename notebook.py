@@ -17,7 +17,7 @@ class Notebook:
     def __init__(self, storage_path: Path = Path("notes.json")) -> None:
         """Initalizes the notebook dictionary and loads existing notes from storage"""
         self.storage_path = storage_path
-        self.notes = dict[str, Note] = {}
+        self.notes: dict[str, Note] = {}
         self.load_notes()
 
     def create_note(self, title: str, body: str) -> None:
