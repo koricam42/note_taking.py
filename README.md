@@ -1,5 +1,5 @@
-[![Project 2 Video](![Video Thumbnail](image.png))](https://www.youtube.com/watch?v=sEFfVBCzTL4)
-# Click Thumbnail To Watch Video
+[![Project 2 Video](image.png)](https://www.youtube.com/watch?v=sEFfVBCzTL4)
+# ^ Click Thumbnail To Watch Video ^
 # Project 2 - Note Taking App OOP Refactor
 
 **Author**: Jordan Mensah
