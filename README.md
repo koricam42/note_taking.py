@@ -1,4 +1,5 @@
-[![Project 2 Video](UPDATED VIDEO THUMBNAIL WILL GO HERE)](UPDATED YOUTUBE LINK WILL GO HERE)
+[![Project 2 Video](![Video Thumbnail](image.png))](https://www.youtube.com/watch?v=sEFfVBCzTL4)
+# Click Thumbnail To Watch Video
 # Project 2 - Note Taking App OOP Refactor
 
 **Author**: Jordan Mensah
@@ -30,14 +31,15 @@ To execute the automated test suite, run the follow command:
 
 **Acknowledgements**
 
-* [Project Guidelines](Updated guidelines go here)
+* [Project Guidelines](https://courses.cscc.edu/ultra/courses/_238744_1/assessment/_28741563_1/attempt/_66804670_1?courseId=_238744_1)
 * [Python Online Textbook](https://learning.oreilly.com/library/view/python-crash-course/9781098156664/)
 * [Pathlib Python Module Help](https://www.geeksforgeeks.org/python/pathlib-module-in-python/)
 * [Python JSON read/write help](https://www.geeksforgeeks.org/python/reading-and-writing-json-to-a-file-in-python/)
 * [Python Dictionary help](https://www.geeksforgeeks.org/python/python-dictionary/)
-* [Project Slideshow](Updated Slideshow goes here)
+* [Project Slideshow](https://docs.google.com/presentation/d/1avcWECJCYM4pWxtDggoSFLAE6yoUmHDksuQgxqDvWpg/edit?usp=sharing)
 * [Dictionary Dispatch Guide](https://martinheinz.dev/blog/90)
 * [Python If Not Guide](https://pythonguides.com/if-not-condition-in-python/)
 * [Pytest Testing/Fixtures Help](https://www.geeksforgeeks.org/python/pytest-tutorial-testing-python-application-using-pytest/)
 * [Pytest Help 2](https://learning.oreilly.com/library/view/python-crash-course/9781098156664/c11.xhtml#h1-502703c11-0001)
 * [Pytest Help 3](https://www.geeksforgeeks.org/python/getting-started-with-pytest/)
+* [Direct Video Link](https://www.youtube.com/watch?v=sEFfVBCzTL4)

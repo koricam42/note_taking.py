@@ -2,7 +2,7 @@
 Name: Notebook
 Author: Jordan Mensah
 Purpose: Defines Notebook Class & Manages collection of Note objects
-Source Code (References): TBA
+Source Code (References): Acknowledgements
 Date: 10/6/26
 """
 import json
@@ -13,7 +13,7 @@ from note import Note
 
 class Notebook:
     """Manages the creation, editing, deleting, and persistence of Note objects"""
-    
+
     def __init__(self, storage_path: Path = Path("notes.json")) -> None:
         """Initalizes the notebook dictionary and loads existing notes from storage"""
         self.storage_path = storage_path
